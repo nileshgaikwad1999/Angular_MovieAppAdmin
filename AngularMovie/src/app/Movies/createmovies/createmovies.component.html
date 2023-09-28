@@ -1,0 +1,42 @@
+<div class="h1">Movies</div>
+<hr/>
+{{errorMessage}}
+<hr/>
+<form [formGroup]="MoviesForm">
+    <div class="form-group" [ngClass]="{'text-danger':MoviesForm.controls['Name'].invalid&&MoviesForm.controls['Name'].touched}">
+        <label>Name</label>
+        <input type="text" class="form-control" formControlName="Name"/>
+        <div *ngIf="MoviesForm.controls['Name'].errors&&MoviesForm.controls['Name'].touched">
+            this filed is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{'text-danger':MoviesForm.controls['ReleaseDate'].invalid&&MoviesForm.controls['ReleaseDate'].touched}">
+        <label>ReleaseDate</label>
+        <input type="date" formControlName="ReleaseDate" class="form-control"/>
+        <div *ngIf="MoviesForm.controls['ReleaseDate'].errors&&MoviesForm.controls['ReleaseDate'].touched">
+            this filed is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{'text-danger':MoviesForm.controls['price'].invalid&&MoviesForm.controls['price'].touched}">
+        <label>price</label>
+        <input type="number" class="form-control" formControlName="price"/>
+        <div *ngIf="MoviesForm.controls['price'].errors&&MoviesForm.controls['price'].touched">
+            this filed is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{'text-danger':MoviesForm.controls['actorId'].invalid&&MoviesForm.controls['actorId'].touched}">
+        <label>actorId</label>
+            <select formControlName="actorId"  class="form-control" >
+             <option value="">Select</option>
+                <option *ngFor="let actor of Actors" [value]="actor.id">{{actor.name}}</option>
+                        </select>
+        <div *ngIf="MoviesForm.controls['actorId'].errors && MoviesForm.controls['actorId'].touched">
+            this filed is required
+        </div>
+    </div>
+    <button type="submit" (click)="SaveChanges()" class="btn bg-primary"> <i class="fa-solid fa-floppy-disk"></i>{{pageBtnTitle}}</button>
+&nbsp;
+<button class="btn btn-danger" (click)="deleteMovies()" *ngIf="movie.id">Delete</button>
+&nbsp;
+<button class="btn btn-dark" (click)="CancelClick()">Cancel</button>
+</form>

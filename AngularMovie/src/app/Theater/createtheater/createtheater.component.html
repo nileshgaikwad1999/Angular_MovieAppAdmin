@@ -1,0 +1,47 @@
+<div class="h1">Theater</div>
+<hr/>
+{{errorMessage}}
+<hr/>
+<form [formGroup]="MoviesTheaterForm">
+
+    <div class="form-group" [ngClass]="{'text-danger':MoviesTheaterForm.controls['Name'].invalid&&MoviesTheaterForm.controls['Name'].touched}">
+        <label>Name</label>
+        <input type="text" class="form-control" formControlName="Name"/>
+        <div *ngIf="MoviesTheaterForm.controls['Name'].errors&&MoviesTheaterForm.controls['Name'].touched">
+            this filed is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{'text-danger':MoviesTheaterForm.controls['location'].invalid&&MoviesTheaterForm.controls['location'].touched}">
+        <label>Location</label>
+        <input type="text" class="form-control" formControlName="location"/>
+        <div *ngIf="MoviesTheaterForm.controls['location'].errors&&MoviesTheaterForm.controls['location'].touched">
+            this filed is required
+        </div>
+    </div><br/>
+    <button class="btn btn-primary" (click)="addMovies()">Add Movies</button>
+   
+    <br/>
+    <div class="col-md-4">
+    <div formArrayName="Details">
+        <div  *ngFor="let movie of Details.controls; let i=index">
+            <div [formGroupName]="i" >
+                <input type="button"  value="X" class="btn btn-danger" (click)="removeMovies(i)"/> 
+                <select class="form-control" formControlName="movieId">
+                    <option value="">select</option>
+                    <option *ngFor="let m of moviesList" [value]="m.id">{{m.name}}</option>
+                </select>
+            </div>
+            &nbsp;
+            
+           
+            <hr/>
+        </div>
+    </div>
+</div>
+    <br/>
+    <button type="submit" (click)="SaveChanges()" class="btn btn-primary"> <i class="fa-solid fa-floppy-disk"></i>{{pageBtnTitle}}</button>
+    &nbsp;
+<button class="btn btn-danger" (click)="deleteMovies()" *ngIf="movieTheater.id">Delete</button>
+&nbsp;
+<button class="btn btn-dark" (click)="CancelClick()">Cancel</button>
+</form>

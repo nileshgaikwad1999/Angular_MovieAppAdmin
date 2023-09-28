@@ -1,0 +1,33 @@
+<div class="h1">Movies</div>
+<hr/>
+
+<button type="button "  class="btn btn-dark" routerLink="create">
+    <i class="fa-solid fa-plus"></i>
+    Create
+  </button>
+  <div *ngIf="!errorMessage else elseBlock">
+  <table class="table table-bordered table-responsive ">
+    <thead>
+        <tr class="bg-primary">
+            <th>Id</th>
+            <th>Name</th>
+            <th>relase Date</th>
+            <th>price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="movieList">
+
+        <tr *ngFor="let movie of movieList" class="bg-light">
+            <td>{{movie.id}}</td>
+            <td>{{movie.name}}</td>
+            <td>{{movie.relaseDate}}</td>
+            <td>{{movie.price}}</td>
+            <td><button type="button" (click)="editMoviesClick(movie.id)"><i class="fa-solid fa-pen-to-square"></i></button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<ng-template #elseBlock>
+    {{errorMessage}}
+</ng-template>

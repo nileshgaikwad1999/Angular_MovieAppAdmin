@@ -1,0 +1,34 @@
+
+<div class="container">
+
+  <div class="row">  
+    <div class="col-md-5 mx-auto">  
+      <div class="card card-heading">
+        <div class="text-primary"><h1>Login</h1> </div>
+      </div>
+
+        <div class="card card-body">  
+        
+  <form [formGroup]="formLogin">
+    <div class="form-group" [ngClass]="{'text-danger':formLogin.controls['UserName'].errors &&formLogin.controls['UserName'].touched}">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" formControlName="UserName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <div *ngIf="formLogin.controls['UserName'].errors&&formLogin.controls['UserName'].touched">
+      UserName is required
+    </div>
+    </div>
+    <div class="form-group" [ngClass]="{'text-danger':formLogin.controls['Password'].errors &&formLogin.controls['Password'].touched}">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" formControlName="Password" placeholder="Password">
+   
+      <div *ngIf="formLogin.controls['Password'].errors&&formLogin.controls['Password'].touched">
+        Password is required
+      </div> </div>
+   <br/>
+    <button type="submit" (click)="onSubmit()" [disabled]="formLogin.invalid" class="btn btn-primary">login</button>
+  </form>
+  <div *ngIf="errorMessage"><b class="text-danger">{{errorMessage}}</b></div>
+</div>
+</div>
+</div>

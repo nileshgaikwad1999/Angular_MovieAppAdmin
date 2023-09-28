@@ -1,0 +1,52 @@
+<div class="h1">Actor</div>
+<hr/>
+<div *ngIf="errorMessage">
+    {{errorMessage}}
+</div>
+<hr/>
+<form
+[formGroup]="ActorForm" 
+>
+<div class="row">
+<div class="form-group" [ngClass]="{'text-danger':getNameError()}">
+    <label>Name</label>
+    <input type="text" formControlName="Name" class="form-control"/>
+    <div *ngIf="getNameError()">
+        {{getNameError()}}
+    </div>
+</div>
+<div class="form-group" [ngClass]="{'text-danger':getdateOfBirthError()}">
+    <label>dateOfBirth</label>
+    <input type="date" formControlName="dateOfBirth" class="form-control"/>
+    <div *ngIf="getdateOfBirthError()">
+        {{getdateOfBirthError()}}
+    </div>
+</div>
+<div class="form-group" [ngClass]="{'text-danger':getgenresError()}">
+    <label>Genres</label>
+    
+    <select formControlName="genres" class="form-control" >
+        <option value="">select</option>
+        <option *ngFor="let item of genresList" [value]="item.id">{{item.name}}</option>
+    </select>
+    <div *ngIf="getgenresError()">
+        {{getgenresError()}}
+    </div>
+</div>
+<div class="form-group" [ngClass]="{'text-danger':getProfilePictureError()}">
+    <label>profile Picture</label>
+    <div [ngStyle]="{'width':'500px','height':'80px'}">
+    <app-img-input (imageEmit)="selectedImage($event)"></app-img-input>
+        <div *ngIf="getProfilePictureError()">
+        {{getProfilePictureError()}}
+    </div>
+</div>
+</div>
+</div>
+    <button type="submit" (click)="SaveChanges()" [disabled]="ActorForm.invalid" class="btn btn-primary"> <i class="fa-solid fa-floppy-disk"></i>{{BtnSaveTitle}}</button>
+&nbsp;
+<button class="btn btn-danger" *ngIf="Actors.id" (click)="DeleteActors()">Delete</button>
+&nbsp;
+    <button type="button"  class="btn btn-dark" (click)="CancelClick()"> Cancel</button>
+
+</form>

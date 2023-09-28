@@ -1,0 +1,9 @@
+<div>
+<button (click)="uploadFile.click()">select File</button>
+<input type="file" hidden #uploadFile accept="image/jpeg, image/png" (change)="change($event)"/>
+<div>
+    <div *ngIf="imageConvert">
+        <img [src]="imageConvert" alt="">
+    </div>
+</div>
+</div>

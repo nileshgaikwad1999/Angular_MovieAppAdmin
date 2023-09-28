@@ -1,0 +1,33 @@
+<div class="h1">Genres</div>
+<hr/>
+
+    <button type="button "  class="btn btn-dark" routerLink="create">
+        <i class="fa-solid fa-plus"></i>
+        Create
+      </button>
+      <div *ngIf="!errorMessage else elseBlock">
+      <div class="row" style="height: 100px;">
+      <app-common-search style="height: 101px;" (searchBtn)="btnSearchClick($event)"></app-common-search>
+    </div>
+
+    <table class="table table-bordered table-responsive ">
+        <thead>
+            <tr class="bg-primary">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="GenrasList">
+
+            <tr *ngFor="let genres of GenrasList" class="bg-light">
+                <td>{{genres.id}}</td>
+                <td>{{genres.name}}</td>
+                <td><button (click)="editGenresClick(genres.id)"><i class="fa-solid fa-pen-to-square"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #elseBlock>
+{{errorMessage}}
+</ng-template>

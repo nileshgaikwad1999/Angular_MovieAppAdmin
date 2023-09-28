@@ -1,0 +1,50 @@
+<div class="h1">Genres</div>
+<hr/>
+{{errorMessage}}
+<hr/>
+<form [formGroup]="genresForm" (ngSubmit)="SaveChanges()" class="border border-info mt-3">
+
+    <div
+      class="form-group"
+      [ngClass]="{ 'text-danger': genresForm.invalid && genresForm.touched }"
+    >
+      <div class="lable-control">Name</div>
+      <input type="text"  class="form-control" formControlName="Name" />
+      <span
+        *ngIf="
+          genresForm.controls['Name'].invalid &&
+          genresForm.controls['Name'].touched
+        "
+      >
+        <s
+          *ngIf="
+            genresForm.controls['Name'].errors &&
+            genresForm.controls['Name'].errors['required']
+          "
+        >
+          Name filed is required
+        </s>
+        <s
+          *ngIf="
+            genresForm.controls['Name'].errors &&
+            genresForm.controls['Name'].errors['Name-check']
+          "
+        >
+          Name doe't include number
+        </s>
+      </span>
+    </div>
+ <div class="col-md-5">
+  <button type="submit" [disabled]="genresForm.invalid" class="btn btn-success mt-3">
+    <i class="fa-solid fa-floppy-disk"></i>{{SubmitBtnTitle}}
+  </button>
+  &nbsp;
+  
+  <button class="btn btn-danger mt-3" type="button" (click)="DeleteGenres()" *ngIf="genres.id">
+    <i class="fa-solid fa-trash-can"></i> Delete
+</button>
+&nbsp;
+<button type="button"  class="btn btn-dark  mt-3" (click)="CancelClick()"> Cancel</button>
+
+</div>
+</form>
